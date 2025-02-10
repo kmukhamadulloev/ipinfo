@@ -1,12 +1,12 @@
 import requests
 import folium
+import argparse
 from pyfiglet import Figlet
 
 
 def get_info_by_ip(ip='127.0.0.1', map=False):
     try:
         response = requests.get(url=f'http://ip-api.com/json/{ip}').json()
-        # print(response)
 
         data = {
             '[IP]': response.get('query'),
@@ -35,10 +35,25 @@ def get_info_by_ip(ip='127.0.0.1', map=False):
 def main():
     preview_text = Figlet(font='slant')
     print(preview_text.renderText('IP INFO'))
-    ip = input('Please enter a target IP: ')
-    map = input('Do you want to save as map? (yes/no): ')
-    map = map == 'yes'
+
+    parser = argparse.ArgumentParser(
+        description='Get IP information and optionally save as map.')
+    parser.add_argument('--ip', help='Target IP address')
+    parser.add_argument('--map', action='store_true',
+                        help='Save as map (no value needed)')
+    args = parser.parse_args()
+
+    ip = args.ip or help()
+    map = args.map
+
     get_info_by_ip(ip, map)
+
+
+def help():
+    print('[!] No IP provided!')
+    print('[?] Example: python3 main.py --ip 8.8.8.8')
+    print('[?] Example with map: python3 main.py --ip 8.8.8.8 --map')
+    exit()
 
 
 if __name__ == '__main__':

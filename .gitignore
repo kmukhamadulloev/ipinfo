@@ -1,2 +1,6 @@
-map/*.html
-venv
+# Ignore list
+env
+maps/*.html
+
+# Examples
+!maps/45.45.45.45.html
