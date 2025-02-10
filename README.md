@@ -1,6 +1,6 @@
 # IP info
 
-IP address parse, using `ip-api.com` resource.
+IP address parser, using `ip-api.com` resource.
 
 Dont forget to create virtual enviroment:
 * Create: `python3 -m venv vevn`
